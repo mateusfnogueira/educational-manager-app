@@ -26,7 +26,8 @@
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
       "@public/*": ["./public/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@providers/*": ["./src/app/_shared/providers/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

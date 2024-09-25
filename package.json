@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint app --max-warnings=0 --ext .ts,.tsx",
+    "lint:fix": "eslint app --max-warnings=0 --ext .ts,.tsx --fix",
+    "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.56.2",
