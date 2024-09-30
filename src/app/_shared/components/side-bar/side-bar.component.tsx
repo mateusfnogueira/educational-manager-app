@@ -71,15 +71,15 @@ export const SideBar = () => {
         <Divider />
         <List>
           {menuItems.map((item, index) => (
-            <>
-              <ListItem disablePadding key={index}>
+            <div key={index}>
+              <ListItem disablePadding>
                 <ListItemButton onClick={() => router.push(item.path)}>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItemButton>
               </ListItem>
               <Divider sx={{ display: item.lastItem ? 'block' : 'none' }} />
-            </>
+            </div>
           ))}
         </List>
       </Box>
