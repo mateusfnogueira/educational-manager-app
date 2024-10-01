@@ -3,17 +3,30 @@ import { Autocomplete, Box, Button, TextField } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { ICreateCourse } from './interfaces/create-course.interface'
 import { weekDays } from './seed/form.seed'
+import { api } from '@/config/api.interceptor'
+import { useRouter } from 'next/navigation'
 
 export default function CreateCourseForm() {
-  const { control, handleSubmit } = useForm<ICreateCourse>({
+  const router = useRouter()
+
+  const { control, reset, handleSubmit } = useForm<ICreateCourse>({
     mode: 'all',
     defaultValues: {
       weekDays: []
     }
   })
 
-  function createCourse(data: ICreateCourse) {
-    console.log(data)
+  async function createCourse(data: ICreateCourse) {
+    await api
+      .post('courses/create', data)
+      .then((response) => {
+        console.log(response.data)
+        reset()
+        router.push('/')
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
