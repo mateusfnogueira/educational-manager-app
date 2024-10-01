@@ -1,5 +1,5 @@
 'use client'
-import { Autocomplete, MenuItem, TextField } from '@mui/material'
+import { Autocomplete, Box, Button, TextField } from '@mui/material'
 import { useForm, Controller } from 'react-hook-form'
 import { ICreateCourse } from './interfaces/create-course.interface'
 import { weekDays } from './seed/form.seed'
@@ -17,7 +17,15 @@ export default function CreateCourseForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(createCourse)}>
+    <form
+      onSubmit={handleSubmit(createCourse)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 16,
+        paddingInline: '15%'
+      }}
+    >
       <Controller
         name="name"
         control={control}
@@ -31,11 +39,11 @@ export default function CreateCourseForm() {
             value={value}
             onChange={onChange}
             onBlur={onBlur}
+            label="Nome do curso"
             slotProps={{
               input: {
                 type: 'text',
-                placeholder: 'Ballet Adulto',
-                label: 'Nome do curso'
+                placeholder: 'Ballet Adulto'
               }
             }}
             error={Boolean(errors.name)}
@@ -56,11 +64,11 @@ export default function CreateCourseForm() {
             value={value}
             onChange={onChange}
             onBlur={onBlur}
+            label="Valor da mensalidade"
             slotProps={{
               input: {
                 type: 'text',
-                placeholder: '0,00',
-                label: 'Valor da mensalidade'
+                placeholder: '0,00'
               }
             }}
             error={Boolean(errors.price)}
@@ -68,36 +76,6 @@ export default function CreateCourseForm() {
           />
         )}
       />
-      {/* <Controller
-        name="weekDays"
-        control={control}
-        render={({
-          field: { name, value, onBlur, onChange },
-          formState: { errors }
-        }) => (
-          <TextField
-            id={'weekDays'}
-            name={name}
-            value={value}
-            onChange={onChange}
-            onBlur={onBlur}
-            select
-            slotProps={{
-              select: {
-                multiple: true
-              }
-            }}
-            error={Boolean(errors.weekDays)}
-            helperText={errors.weekDays?.message}
-          >
-            {weekDays.map((day) => (
-              <MenuItem key={day.value} value={day.value}>
-                {day.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        )}
-      /> */}
       <Controller
         name="weekDays"
         control={control}
@@ -118,6 +96,86 @@ export default function CreateCourseForm() {
           />
         )}
       />
+      <Controller
+        name="duration"
+        control={control}
+        render={({
+          field: { name, value, onBlur, onChange },
+          formState: { errors }
+        }) => (
+          <TextField
+            id={'duration'}
+            name={name}
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            label="Duração da aula(em minutos)"
+            slotProps={{
+              input: {
+                type: 'text',
+                placeholder: '60'
+              }
+            }}
+            error={Boolean(errors.duration)}
+            helperText={errors.duration?.message}
+          />
+        )}
+      />
+      <Box display={'flex'} gap={'8px'}>
+        <Controller
+          name="startClass"
+          control={control}
+          render={({
+            field: { name, value, onBlur, onChange },
+            formState: { errors }
+          }) => (
+            <TextField
+              id={'startClass'}
+              name={name}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              sx={{ width: '100%' }}
+              label="Horário de início"
+              slotProps={{
+                input: {
+                  type: 'time'
+                }
+              }}
+              error={Boolean(errors.startClass)}
+              helperText={errors.startClass?.message}
+            />
+          )}
+        />
+        <Controller
+          name="endClass"
+          control={control}
+          render={({
+            field: { name, value, onBlur, onChange },
+            formState: { errors }
+          }) => (
+            <TextField
+              id={'endClass'}
+              name={name}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              sx={{ width: '100%' }}
+              label="Horário de término"
+              slotProps={{
+                input: {
+                  type: 'time'
+                }
+              }}
+              error={Boolean(errors.endClass)}
+              helperText={errors.endClass?.message}
+            />
+          )}
+        />
+      </Box>
+      <Button type="submit" variant="contained">
+        Criar curso
+      </Button>
     </form>
   )
 }

@@ -54,7 +54,7 @@ export const SideBar = () => {
   const { setOpenSideBar, openSideBar } = useGlobalStore()
 
   return (
-    <Drawer open={openSideBar} SlideProps={{ appear: true }} hideBackdrop>
+    <Drawer open={openSideBar} variant="persistent" hideBackdrop>
       <Box
         sx={{ width: 250, height: '100%' }}
         // bgcolor={'#EB1CC8E8'}
